@@ -1,7 +1,7 @@
 {
-    "name": "atlantis",
+    "name": "expert-group-frontend",
     "version": "13.1.0",
-    "license": "PrimeNG Commercial",
+    "license": "Prueba Xpert Group",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",

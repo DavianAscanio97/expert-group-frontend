@@ -77,14 +77,14 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "atlantis:build"
+                        "browserTarget": "expert-group-frontend:build"
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "atlantis:build:production"
+                            "browserTarget": "expert-group-frontend:build:production"
                         },
                         "development": {
-                            "browserTarget": "atlantis:build:development"
+                            "browserTarget": "expert-group-frontend:build:development"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -92,7 +92,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "atlantis:build"
+                        "browserTarget": "expert-group-frontend:build"
                     }
                 },
                 "test": {
@@ -129,5 +129,5 @@
             }
         }
     },
-    "defaultProject": "atlantis"
+    "defaultProject": "expert-group-frontend"
 }
