@@ -1,0 +1,101 @@
+<div class="grid">
+	<div class="col-12 md:col-6">
+		<div class="card p-fluid">
+            <h5>Galería</h5>
+            <p-galleria [value]="images" [responsiveOptions]="galleriaResponsiveOptions"
+                        [containerStyle]="{'margin':'auto'}" [numVisible]="3" [circular]="true">
+                <ng-template pTemplate="item" let-item>
+                    <img [src]="item.itemImageSrc" style="width: 100%; display: block;"/>
+                </ng-template>
+                <ng-template pTemplate="thumbnail" let-item>
+                    <div class="grid nogutter justify-center">
+                        <img [src]="item.thumbnailImageSrc" style="width: 100%; display: block;"/>
+                    </div>
+                </ng-template>
+            </p-galleria>
+		</div>
+
+	</div>
+
+	<div class="col-12 md:col-6">
+		<div class="card p-fluid">
+			<h5>¿Qué deseas buscar?</h5>
+			<div class="field grid">
+				<label htmlFor="name3" class="col-12 mb-2 md:col-2 md:mb-0">Buscar: </label>
+				<div class="col-12 md:col-10">
+					<input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="" />
+				</div>
+			</div>
+			<div class="field grid">
+				<label htmlFor="email3" class="col-12 mb-2 md:col-2 md:mb-0">Razas</label>
+				<div class="col-12 md:col-10">
+					<p-dropdown [options]="this.breeds" optionLabel="name" (onChange)="loadImagesBreeds()" optionValue="id" [(ngModel)]="selectedState"></p-dropdown>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-12">
+		<div class="card">
+			<h5>Listado de gatos</h5>
+			<p-table #dt1 [value]="breeds" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']" responsiveLayout="scroll">
+
+				<ng-template pTemplate="header">
+					<tr>
+						<th>
+							<div class="flex justify-content-between align-items-center">
+								Nombre
+								<p-columnFilter type="text" field="name" display="name" placeholder="Search by name"></p-columnFilter>
+							</div>
+						</th>
+						<th>
+							<div class="flex justify-content-between align-items-center">
+								Origen
+								<p-columnFilter type="text" field="origin" display="menu" placeholder="Search by country"></p-columnFilter>
+							</div>
+						</th>
+                        <th>
+							<div class="flex justify-content-between align-items-center">
+								Imagen
+							</div>
+						</th>
+                        <th>
+							<div class="flex justify-content-between align-items-center">
+								Temperamento
+								<p-columnFilter type="text" field="temperament" display="menu" placeholder="Search by country"></p-columnFilter>
+							</div>
+						</th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-breed>
+					<tr>
+						<td style="min-width: 12rem;">
+							{{breed.name}}
+						</td>
+						<td style="min-width: 12rem;">
+							<img src="assets/demo/flags/flag_placeholder.png" [class]="'flag flag-' + breed.country_code.toLowerCase()" width="30">
+							<span class="image-text ml-2">{{breed.origin}}</span>
+						</td>
+						<td style="min-width: 14rem;">
+                            <img *ngIf="!breed.image" src="assets/demo/flags/flag_placeholder.png" width="30">
+							<img *ngIf="breed.image" [alt]="breed.image.id" src="{{breed.image.url}}" width="32" style="vertical-align: middle"/>
+						</td>
+						<td style="min-width: 10rem;">
+							{{breed.temperament}}
+						</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="emptymessage">
+					<tr>
+						<td colspan="8">No se encontraron registros</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="loadingbody">
+					<tr>
+						<td colspan="8">Cargando registros, por favor espere.</td>
+					</tr>
+				</ng-template>
+    		</p-table>
+		</div>
+	</div>
+</div>
